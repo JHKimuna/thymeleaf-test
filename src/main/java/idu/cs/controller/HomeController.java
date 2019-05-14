@@ -28,17 +28,20 @@ public class HomeController {
 	public String home(Model model) {
 		model.addAttribute("test", "인덕컴소");
 		model.addAttribute("kjh", "김준하");
+		System.out.println("ouwouw");
 		return "index";
 	}
 	
-	@GetMapping("/welcome")
+	@GetMapping("/")
 	public String loadWelcome(Model model) {
+		System.out.println("gas");
 		return "welcome";
 	}
 	
 	@GetMapping("/users")
 	public String getAllUser(Model model) {
 		model.addAttribute("users", userRepo.findAll());
+		System.out.println("nnn");
 		return "userlist";
 	}
 	
@@ -49,19 +52,23 @@ public class HomeController {
 		model.addAttribute("id", ""+userId);
 		model.addAttribute("name", ""+user.getName());
 		model.addAttribute("company", ""+user.getCompany());
+		System.out.println("ddd");
 		//Optional<User> user = userRepo.findById(userId);
 		return "user";
 	}
 	
-	@GetMapping("/register")
+	@GetMapping("/regform")
 	public String loadRegForm(Model model) {
 		model.addAttribute("users", userRepo.findAll());
+		System.out.println("ggg");
 		return "regform";
 	}
 	
 	@PostMapping("/create")
 	public String CreateUser(@Valid @RequestBody User user, Model model) {
 		userRepo.save(user);
+		
+		System.out.println("aaaaaa");
 		model.addAttribute("users", userRepo.findAll());
 		return "redirect:/users";
 	}

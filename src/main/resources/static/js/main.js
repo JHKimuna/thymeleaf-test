@@ -1,20 +1,15 @@
 $(document).ready(function () {
 
     $("#regform").submit(function (event) {
-
         //stop submit the form, we will post it manually.
         event.preventDefault();
-
         fire_ajax_submit();
-
     });
-
 });
 
 function fire_ajax_submit() {
 
     // var data = $("#regform").serializeArray();
-	
 	var data = {
 			"name" : $('#name').val(),
 			"company" : $('#company').val()
@@ -34,7 +29,7 @@ function fire_ajax_submit() {
         timeout: 600000,
         success: function (data) {
         	console.log("SUCCESS : ", data);
-        	window.location.href="/welcome";
+        	window.location.href="/users";
         },
         error: function (e) {
             console.log("ERROR : ", e);
