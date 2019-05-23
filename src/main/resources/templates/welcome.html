@@ -12,26 +12,23 @@
     <script type="text/javascript"
         src="webjars/jquery/3.4.1/jquery.min.js"></script>
     -->
-    <!-- CDN방식 -->
+    <!-- CDN방식 --><!-- 
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
+    -->
+    
+    <th:block th:include="fragments/header"></th:block>
 </head>
 <body>
 
-<nav class="navbar navbar-inverse">
-    <div class="container">
-        <div class="navbar-header">
-            <a class="navbar-brand" href="#">Mkyong.com</a>
-        </div>
-    </div>
-</nav>
+<th:block th:include="fragments/nav"></th:block>
 
 <div class="container" style="min-height: 500px">
 
     <div class="starter-template">
         <h1><p th:text="${name}"/> 방문을 환영합니다.</h1>
-        <a href="./regform">회원가입</a>
-        <a href="./products/new">회원가입</a>
+        <a href="./regform">회원등록</a>
+        <a href="./products/new">상품등록</a>
         <div id="feedback"></div>
 
 
@@ -39,17 +36,6 @@
 
 </div>
 
-<div class="container">
-    <footer>
-        <p>
-            © <a href="http://www.mkyong.com">Mkyong.com</a> 2017
-        </p>
-    </footer>
-</div>
-
-
-
-<script type="text/javascript" src="js/main.js"></script>
-
+<th:block th:include="fragments/footer"></th:block>
 </body>
 </html>

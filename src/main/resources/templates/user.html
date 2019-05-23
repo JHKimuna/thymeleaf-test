@@ -1,63 +1,84 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-
+<html xmlns="http://www.w3.org/1999/xhtml" 
+	  xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>개인 폼</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title>사용자 정보 조회</title>
     <th:block th:include="fragments/header"></th:block>
-    <script type="text/javascript" src="/js/main.js"></script>
-	<!-- Dependency 방식 -->
-	<!-- 
-    <link rel="stylesheet" type="text/css"
-          href="webjars/bootstrap/4.3.1/css/bootstrap.min.css"/>
-    <script type="text/javascript"
-        src="webjars/jquery/3.4.1/jquery.min.js"></script>
-    -->
-    <!-- CDN방식 -->
-    <!-- 
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
-    -->
+    <!-- 웹 브라우저에 내장된 html 인터프리터에게 무시. 우리반 소스에서는 필요함 
+ 	<script type="text/javascript" src="/js/main.js"></script>
+ 	-->
 </head>
+<!-- // A반 소스, main.js 사용 안하고  put으로 전달!-->
 <body>
 
 <th:block th:include="fragments/nav"></th:block>
 
 <div class="container" style="min-height: 500px">
 
-    <div class="starter-template">
-        <h1>사용자 정보 조회</h1>
+<table class="table">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">ID</th>
+      <th scope="col">NAME</th>
+      <th scope="col">COMPANY</th>
+      <th scope="col">Update</th>
+      <th scope="col">Delete</th>
+    </tr>
+  </thead>
+  <tbody>
+  	<tr> 
+  		<form th:action="@{'/users/{id}'(id=${id})}" th:method="put" th:object="${user}">  	
+		<th scope="row"><span th:text="${id}"></span></th>
+		<td><input type="text" name="name" th:field="*{name}" /></td>
+		<td><input type="text" name="company" th:field="*{company}" /></td>
+		<!--  *은 객체 내에 있는 것을 참조할 때 사용 -->
+		<td><button type="submit" id="updateButton">update</button></td>
+		</form>
+		<td>
+		<form th:action="@{'/users/{id}'(id=${id})}" th:method="delete">
+			<input type="hidden" name="id" th:value="${id}"/>
+			<button type="submit" id="deleteButton">delete</button>
+		</form>
+		</td>
+	</tr>
+  </tbody>
+  
+  <!--
+// 우리반 
 
-        <div id="feedback"></div>
+		  <tbody>
+		    <tr>
+		      <form class="form-horizontal" id="updateform">
+		      <th scope="row"><span th:text="${id}"></span>
+		      <input type="hidden" class="form-control" 
+		      	   id="id" name="id" th:value="${id}"/></th>
+		      <td><input type="text" class="form-control" 
+		      	   id="name" name="name" th:value="${name}"/></span></td>
+		      <td><input type="text" class="form-control" 
+		      	   id="company" name="company" th:value="${company}"/></td>  
+		      <td>
+		      	<button type="submit" id="bth-update"
+                            class="btn btn-primary btn-lg">수정
+                </button>
+              </td>
+              </form>
+              <td>
+		      <form class="form-horizontal" id="delform">
+		      	   <input type="hidden" class="form-control" 
+		      	   id="id" name="id" th:value="${id}"/>
+		      	  <button type="submit" id="bth-delete"
+                            class="btn btn-primary btn-lg">삭제
+                  </button>
+              </form>
+		      </td>
+		    </tr>
+		    
+		  </tbody>
 
-        <table class="table table-dark">
-			<thead>
-				<tr>
-					<th scope="col">아이디</th>
-					<th scope="col">이름</th>
-					<th scope="col">회사</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr>
-					<th scope="row"><span th:text="${id}"/></th>
-					<td><span th:text="${name}"/></td>
-					<td><span th:text="${company}"/></td>
-				</tr>
-			</tbody>
-		</table>
-
-    </div>
-
+-->
+</table>
 </div>
 
-
 <th:block th:include="fragments/footer"></th:block>
-
-
-
-
-
-
 </body>
 </html>
