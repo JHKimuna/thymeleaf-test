@@ -1,5 +1,6 @@
 package idu.cs.controller;
 
+import java.util.List;
 import java.util.Optional;
 
 import javax.validation.Valid;
@@ -18,6 +19,7 @@ import idu.cs.exception.ResourceNotFoundException;
 import idu.cs.repository.UserRepository;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.data.repository.query.Param;
 
 @Controller
 public class HomeController {
@@ -42,6 +44,20 @@ public class HomeController {
 	@GetMapping("/users")
 	public String getAllUser(Model model) {
 		model.addAttribute("users", userRepo.findAll());
+		return "userlist";
+	}
+	
+	@GetMapping("/users/byname")
+	public String getUsersByName(@Param(value="name") String name, Model model) {
+		List<User> users = userRepo.findByName(name);
+		model.addAttribute("users", users);
+		return "userlist";
+	}
+	
+	@GetMapping("/users/nameasc")
+	public String getUsersByNameAsc(@Param(value="name") String name, Model model) {
+		List<User> users = userRepo.findByNameOrderByIdAsc(name);
+		model.addAttribute("users", users);
 		return "userlist";
 	}
 	
@@ -95,6 +111,8 @@ public class HomeController {
 		model.addAttribute("name", user.getName());
 		return "disjoin";
 	}
+	
+	
 	/* Ajax 사용시 사용이라고 추측.
 	@GetMapping("/disjoin")
 	public String disjoinForm(Model model) {
